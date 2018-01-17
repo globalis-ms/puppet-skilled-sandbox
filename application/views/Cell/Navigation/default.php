@@ -14,6 +14,8 @@
                     <?= html_escape($this->fetch('user')->first_name . ' ' . $this->fetch('user')->last_name) ?>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <?= anchor('frontoffice/profile', lang('navigation_account'), ['class' => 'dropdown-item']) ?>
+                    <div class="dropdown-divider"></div>
                     <?= anchor('authentication/logout', lang('navigation_logout'), ['class' => 'dropdown-item']) ?>
                 </div>
             </div>
