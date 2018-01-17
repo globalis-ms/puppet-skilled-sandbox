@@ -6,6 +6,49 @@ class AddAuthTables extends PuppetSkilledMigration
 {
     public function change()
     {
+        // Roles table
+        $table = $this->table('roles', array(
+            'id' => false,
+            'primary_key' => array('id')
+        ));
+        $table->addColumn('id', 'string', array(
+            'limit' => 36,
+        ))
+        ->addColumn('resources_support', 'blob', array(
+            'limit' => MysqlAdapter::BLOB_LONG,
+            'null' => true,
+            'default' => null
+        ))
+        ->addColumn('created_at', 'datetime', array(
+            'default' => 'CURRENT_TIMESTAMP(6)',
+            'limit' => 6,
+        ))
+        ->addColumn('updated_at', 'datetime', array(
+            'default' => 'CURRENT_TIMESTAMP(6)',
+            'limit' => 6,
+        ))
+        ->addColumn('deleted_at', 'datetime', array(
+            'default' => null,
+            'null' => true,
+            'limit' => 6,
+        ))
+        ->addIndex('deleted_at')
+        ->create();
+
+        // Role permissions
+        $table = $this->table('roles_permissions', array(
+            'id' => false,
+            'primary_key' => array('role_id', 'permission_name')
+        ));
+        $table->addColumn('role_id', 'string', array(
+            'limit' => 36,
+        ))
+        ->addColumn('permission_name', 'string', array(
+            'limit' => 255
+        ))
+        ->addForeignKey('role_id', 'roles', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
+        ->create();
+
         // Companies table
         $table = $this->table('companies', array(
             'id' => false,
@@ -58,9 +101,6 @@ class AddAuthTables extends PuppetSkilledMigration
         ->addColumn('email', 'string', array(
             'limit' => 255,
         ))
-        ->addColumn('company_id', 'string', array(
-            'limit' => 36,
-        ))
         ->addColumn('phone', 'string', array(
             'limit' => 10,
         ))
@@ -112,40 +152,6 @@ class AddAuthTables extends PuppetSkilledMigration
         ))
         ->addIndex(['username', 'deleted_at'])
         ->addIndex('deleted_at')
-        ->addForeignKey('company_id', 'companies', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
-        ->create();
-
-        // Roles table
-        $table = $this->table('roles', array(
-            'id' => false,
-            'primary_key' => array('id')
-        ));
-        $table->addColumn('id', 'string', array(
-            'limit' => 36,
-        ))
-        ->addColumn('name', 'string', array(
-            'limit' => 255,
-        ))
-        ->addColumn('resources_support', 'blob', array(
-            'limit' => MysqlAdapter::BLOB_LONG,
-            'null' => true,
-            'default' => null
-        ))
-        ->addColumn('created_at', 'datetime', array(
-            'default' => 'CURRENT_TIMESTAMP(6)',
-            'limit' => 6,
-        ))
-        ->addColumn('updated_at', 'datetime', array(
-            'default' => 'CURRENT_TIMESTAMP(6)',
-            'limit' => 6,
-        ))
-        ->addColumn('deleted_at', 'datetime', array(
-            'default' => null,
-            'null' => true,
-            'limit' => 6,
-        ))
-        ->addIndex('name')
-        ->addIndex('deleted_at')
         ->create();
 
         // User has Roles table
@@ -161,18 +167,24 @@ class AddAuthTables extends PuppetSkilledMigration
         ->addForeignKey('role_id', 'roles', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
         ->create();
 
-        // Role permissions
-        $table = $this->table('roles_permissions', array(
-            'id' => false,
-            'primary_key' => array('role_id', 'permission_name')
-        ));
-        $table->addColumn('role_id', 'string', array(
+        // Resources table
+        $table = $this->table('resources');
+        $table->addColumn('user_id', 'string', [
             'limit' => 36,
+        ])
+        ->addColumn('row_id', 'string', array(
+            'limit' => 255,
         ))
-        ->addColumn('permission_name', 'string', array(
-            'limit' => 255
+        ->addColumn('resource_type', 'string', array(
+            'limit' => 255,
         ))
-        ->addForeignKey('role_id', 'roles', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
+        ->addColumn('created_at', 'datetime', array(
+            'default' => 'CURRENT_TIMESTAMP(6)',
+            'limit' => 6,
+        ))
+        ->addIndex(['resource_type'])
+        ->addIndex(['user_id', 'resource_type', 'row_id'], ['unique' => true])
+        ->addForeignKey('user_id', 'users', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
         ->create();
 
         // Revisions table

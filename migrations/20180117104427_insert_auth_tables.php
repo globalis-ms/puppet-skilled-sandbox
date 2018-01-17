@@ -5,27 +5,24 @@ class InsertAuthTables extends PuppetSkilledMigration
     public function up()
     {
         // Roles
-        $roleAdministratorId = $this->uuid();
-        $roleManagerId = $this->uuid();
-        $roleUserId = $this->uuid();
         $roles = [
-            ['id' => $roleAdministratorId, 'name' => 'administrator'],
-            ['id' => $roleManagerId, 'name' => 'manager'],
-            ['id' => $roleUserId, 'name' => 'user'],
+            ['id' => 'administrator'],
+            ['id' => 'manager', 'resources_support' => serialize(['\App\Service\Secure\Company'])],
+            ['id' => 'user', 'resources_support' => serialize(['\App\Service\Secure\Company'])],
         ];
         $this->insert('roles', $roles);
 
         // Roles Permissions
         $insert = [
-            $roleAdministratorId => [
+            'administrator' => [
                 'backoffice',
                 'frontoffice',
             ],
-            $roleManagerId => [
+            'manager' => [
                 'backoffice.user',
                 'frontoffice',
             ],
-            $roleUserId => [
+            'user' => [
                 'frontoffice',
             ]
         ];
@@ -46,8 +43,8 @@ class InsertAuthTables extends PuppetSkilledMigration
         $this->insert('companies', $companies);
 
         // Create first user
-        $userDevId = $this->uuid();
         $userAdminId = $this->uuid();
+        $userManagerId = $this->uuid();
         $userCompanyId = $this->uuid();
         $userMultiCompanyId = $this->uuid();
         $users = [
@@ -58,7 +55,6 @@ class InsertAuthTables extends PuppetSkilledMigration
                 'first_name' => 'Michel',
                 'last_name' => 'Administrator',
                 'email' => 'administrator@globalis-ms.com',
-                'company_id' => $companyId,
                 'language' => 'fr',
                 'phone' => '0102030405',
                 'mobile' => '0605040302',
@@ -70,13 +66,12 @@ class InsertAuthTables extends PuppetSkilledMigration
                 'datetime_format' => '%d %B %Y, %H:%M',
             ],
             [
-                'id' => $userDevId,
+                'id' => $userManagerId,
                 'username' => 'manager@globalis-ms.com',
                 'password' => '$2y$10$A7fcNEN5Gmvns6sIXecujevtmcvPZCaTG3cNdCVWssJkkbKUUkPD.', // puppetskilled
                 'first_name' => 'Michel',
                 'last_name' => 'Manager',
                 'email' => 'manager@globalis-ms.com',
-                'company_id' => $companyId,
                 'language' => 'fr',
                 'phone' => '0102030405',
                 'mobile' => '0605040302',
@@ -94,7 +89,6 @@ class InsertAuthTables extends PuppetSkilledMigration
                 'first_name' => 'Michel',
                 'last_name' => 'User',
                 'email' => 'user@globalis-ms.com',
-                'company_id' => $companyId,
                 'language' => 'fr',
                 'phone' => '0102030405',
                 'mobile' => '0605040302',
@@ -108,21 +102,37 @@ class InsertAuthTables extends PuppetSkilledMigration
         ];
         $this->insert('users', $users);
 
+
         // Add user role
         $this->insert('users_roles', [
             [
-                'user_id' => $userDevId,
-                'role_id' => $roleManagerId,
+                'user_id' => $userAdminId,
+                'role_id' => 'administrator'
             ],
             [
-                'user_id' => $userAdminId,
-                'role_id' => $roleAdministratorId,
+                'user_id' => $userManagerId,
+                'role_id' => 'manager'
             ],
             [
                 'user_id' => $userCompanyId,
-                'role_id' => $roleUserId,
+                'role_id' => 'user'
             ],
         ]);
+
+        // Add user resources
+        $this->insert('resources', [
+            [
+                'user_id' => $userManagerId,
+                'row_id' => $companyId,
+                'resource_type' => 'App\Model\Company',
+            ],
+            [
+                'user_id' => $userCompanyId,
+                'row_id' => $companyId,
+                'resource_type' => 'App\Model\Company',
+            ],
+        ]);
+
 
         $this->output->writeln('<fg=green>Admin user create</>');
         $this->output->writeln('<options=bold>login: administrator@globalis-ms.com</>');
@@ -159,7 +169,6 @@ class InsertAuthTables extends PuppetSkilledMigration
 
     public function down()
     {
-        $this->execute('DELETE FROM users_roles');
         $this->execute('DELETE FROM roles_permissions');
         $this->execute('DELETE FROM roles');
         $this->execute('DELETE FROM companies');

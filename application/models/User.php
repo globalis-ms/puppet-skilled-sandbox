@@ -64,7 +64,6 @@ class User extends Model
     ];
 
     protected $nonRevisionable = [
-        'session_id',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -76,14 +75,6 @@ class User extends Model
     public function roles()
     {
         return $this->belongsToMany('App\Model\Role', 'users_roles')->withPivot('id');
-    }
-
-    /**
-     * Get the fonction record associated with the user.
-     */
-    public function fonction()
-    {
-        return $this->belongsToMany('App\Model\Fonction', 'users_fonctions');
     }
 
     /**

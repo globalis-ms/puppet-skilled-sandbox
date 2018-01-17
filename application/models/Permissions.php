@@ -1,7 +1,9 @@
 <?php
 namespace App\Model;
 
-class Permissions extends \Globalis\PuppetSkilled\Database\Magic\Model
+use Globalis\PuppetSkilled\Database\Magic\Model;
+
+class Permissions extends Model
 {
     /**
      * The table associated with the model.
