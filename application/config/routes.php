@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 if (!is_cli()) {
-    $route['default_controller'] = 'welcome/index';
+    $route['default_controller'] = 'authentication/login';
     $route['404_override'] = 'miscellaneous/not_found';
     $route['translate_uri_dashes'] = false;
 
