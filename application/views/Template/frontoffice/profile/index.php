@@ -31,7 +31,7 @@
             'input_element' => 'form/info',
             'label' => 'lang:profile_label_company',
             'id' => $preprendId . 'company',
-            'default_value' => !empty($this->fetch('item')->company) ? $this->fetch('item')->company[0]->name : lang('general_label_undefined')
+            'default_value' => !empty($this->fetch('item')->companies) ? $this->fetch('item')->companies[0]->name : lang('general_label_undefined')
         ]
     ) ?>
     <div class="row">
