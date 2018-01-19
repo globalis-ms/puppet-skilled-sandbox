@@ -1,8 +1,8 @@
 <?php
 namespace App\Model;
 
-use App\Model\Relations\UserFonctionPivot;
 use Globalis\PuppetSkilled\Database\Magic\Model;
+use App\Model\Role;
 
 class User extends Model
 {
@@ -159,5 +159,20 @@ class User extends Model
     public function getAuthIdentifier()
     {
         return $this->username;
+    }
+
+    public function isAdministrator()
+    {
+        return in_array(Role::ADMIN, array_pluck($this->roles, 'id'));
+    }
+
+    public function isManager()
+    {
+        return in_array(Role::MANAGER, array_pluck($this->roles, 'id'));
+    }
+
+    public function isUser()
+    {
+        return in_array(Role::USER, array_pluck($this->roles, 'id'));
     }
 }
