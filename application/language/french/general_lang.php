@@ -33,6 +33,7 @@ $lang['general_label_page_size'] = 'Affichage par: ';
 $lang['general_label_total_element'] = 'Nombre total d\'éléments';
 $lang['general_label_selection'] = 'Sélection';
 $lang['general_label_company_logo'] = 'Logo de l\'entreprise';
+$lang['general_label_undefined'] = 'Non défini';
 
 // Paginatons
 $lang['general_label_pagination_first_page'] = 'Première page';

@@ -24,6 +24,16 @@
             'default_value' => $this->fetch('item')->email
         ]
     ) ?>
+    <?= $this->element(
+        'form/block_input',
+        [
+            'name' => 'company',
+            'input_element' => 'form/info',
+            'label' => 'lang:profile_label_company',
+            'id' => $preprendId . 'company',
+            'default_value' => !empty($this->fetch('item')->company) ? $this->fetch('item')->company[0]->name : lang('general_label_undefined')
+        ]
+    ) ?>
     <div class="row">
         <div class="col-lg-6">
         <?= $this->element(
