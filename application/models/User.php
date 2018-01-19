@@ -6,7 +6,7 @@ use Globalis\PuppetSkilled\Database\Magic\Model;
 
 class User extends Model
 {
-    // use \Globalis\PuppetSkilled\Database\Magic\SoftDeletes;
+    use \Globalis\PuppetSkilled\Database\Magic\SoftDeletes;
     use \Globalis\PuppetSkilled\Database\Magic\Uuid;
     use \Globalis\PuppetSkilled\Database\Magic\Lock\Lockable;
 
@@ -75,6 +75,14 @@ class User extends Model
     public function roles()
     {
         return $this->belongsToMany('App\Model\Role', 'users_roles')->withPivot('id');
+    }
+
+    /**
+     * Get the company associated with the user.
+     */
+    public function company()
+    {
+        return $this->morphToMany('\App\Model\Company', 'resource', 'resources', 'user_id', 'row_id', true);
     }
 
     /**

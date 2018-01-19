@@ -7,9 +7,6 @@ class Home extends \App\Core\Controller\FrontOffice
 
     public function index()
     {
-        $users = App\Model\User::get();
-        $this->render([
-            'userlist' => $users,
-        ]);
+        $this->render();
     }
 }
