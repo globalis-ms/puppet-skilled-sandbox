@@ -80,7 +80,7 @@ class User extends Model
     /**
      * Get the company associated with the user.
      */
-    public function company()
+    public function companies()
     {
         return $this->morphToMany('\App\Model\Company', 'resource', 'resources', 'user_id', 'row_id', true);
     }
