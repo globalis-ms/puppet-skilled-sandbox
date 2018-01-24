@@ -42,6 +42,8 @@ endforeach;
         </div>
     </aside>
     <nav class="Sidenav-nav">
+    <h2><?= lang('navigation_frontoffice') ?></h2>
+    <?= navigation_anchor('frontoffice/contact', lang('navigation_frontoffice_contact')) ?>
     </nav>
     <footer class="Sidenav-footer">
     <?php if (!empty($this->fetch('footer_nav'))): ?>

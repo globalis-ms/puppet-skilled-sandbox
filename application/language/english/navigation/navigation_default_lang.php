@@ -5,6 +5,7 @@ $lang['navigation_logout'] = 'Logout';
 
 // Front
 $lang['navigation_frontoffice'] = 'Menu';
+$lang['navigation_frontoffice_contact'] = 'Contact book';
 
 // Admin
 $lang['navigation_backoffice'] = 'Administration';
