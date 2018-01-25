@@ -34,6 +34,11 @@ $lang['general_label_total_element'] = 'Total number of elements';
 $lang['general_label_selection'] = 'Selection';
 $lang['general_label_company_logo'] = 'Company logo';
 $lang['general_label_undefined'] = 'Undefined';
+$lang['general_label_role_admin'] = 'Administrator';
+$lang['general_label_role_manager'] = 'Manager';
+$lang['general_label_role_user'] = 'User';
+$lang['general_label_yes'] = 'Yes';
+$lang['general_label_no'] = 'No';
 
 // Paginatons
 $lang['general_label_pagination_first_page'] = 'First page';

@@ -11,6 +11,7 @@ $lang['navigation_frontoffice_contact'] = 'Contact book';
 $lang['navigation_backoffice'] = 'Administration';
 $lang['navigation_backoffice_setting'] = 'Configuration';
 $lang['navigation_backoffice_user'] = 'Users';
+$lang['navigation_backoffice_company'] = 'Companies';
 
 
 // Footer

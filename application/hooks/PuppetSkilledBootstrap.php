@@ -21,7 +21,8 @@ class PuppetSkilledBootstrap
 
         // Register authentication Service
         $container['authenticationService'] = function () {
-            $auth = new \Globalis\PuppetSkilled\Auth\Authentication();
+            $auth = new App\Service\Authentication();
+            $auth->addResource('App\\Service\\Secure\\Company');
             return $auth;
         };
 

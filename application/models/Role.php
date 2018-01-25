@@ -77,4 +77,13 @@ class Role extends Model
             $this->attributes['resources_support'] = $values;
         }
     }
+
+    public static function roleList()
+    {
+        return [
+            static::ADMIN,
+            static::MANAGER,
+            static::USER,
+        ];
+    }
 }
