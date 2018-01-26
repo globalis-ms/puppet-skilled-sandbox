@@ -1,11 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use App\Service\Language\Language;
+
 class Miscellaneous extends \App\Core\Controller\Base
 {
     protected $isPublic = true;
 
     protected $layout = 'simple';
+
+    /**
+     * Change language
+     *
+     * @param  string $langue
+     */
+    public function changelanguage($langue = null)
+    {
+        $service = new Language();
+        $service->change($langue);
+        redirect_referrer();
+    }
 
     /**
      * 404 Error

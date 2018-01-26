@@ -1,6 +1,7 @@
 <?php
 namespace App\View\Cell;
 
+use App\Service\Language\Language;
 use App\Service\Notification\Model as NotificationModel;
 
 class Navigation extends \Globalis\PuppetSkilled\View\Cell
@@ -14,6 +15,7 @@ class Navigation extends \Globalis\PuppetSkilled\View\Cell
         // Load lang
         $this->lang->load('navigation/navigation_default');
 
+        $data = $this->getLanguagesNav();
         $data['footer_nav'] = $this->getFooterNav();
         $data['user'] = $this->authenticationService->user();
 
@@ -36,12 +38,23 @@ class Navigation extends \Globalis\PuppetSkilled\View\Cell
     public function offlineFooter()
     {
         $this->lang->load('navigation/navigation_default');
+        $data = $this->getLanguagesNav();
         $data['footer_nav'] = $this->getFooterNav();
 
         return $this->render(
             'offline_footer',
             $data
         );
+    }
+
+    protected function getLanguagesNav()
+    {
+        $languages = $this->languageService->getLanguagesList();
+        $current_language = $this->languageService->getCurrentLanguage();
+        return [
+            'languages' => $languages,
+            'current_language' => $current_language,
+        ];
     }
 
     protected function getFooterNav()

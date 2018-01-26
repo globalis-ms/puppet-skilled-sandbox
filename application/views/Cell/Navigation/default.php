@@ -4,6 +4,26 @@
 <section class="Sidenav">
     <header class="Sidenav-header">
         <img class="Sidenav-header-icon" src="<?= $this->asset->getImageLink('icon.png') ?>" alt="Application icon">
+<?php /* LANGUAGE SELECTION */ ?>
+        <div class="Sidenav-header-lang dropdown">
+            <button class="btn btn-inverse btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?= html_escape($this->fetch('languages')[$this->fetch('current_language')]) ?>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+<?php
+foreach ($this->fetch('languages') as $key => $label) :
+?>
+            <?= anchor(
+                'miscellaneous/changelanguage/'.$key, $label,
+                [
+                    'class' => 'dropdown-item'. (($this->fetch('current_language') === $key)? ' active' : '')
+                ]
+            ) ?>
+<?php
+endforeach;
+?>
+            </div>
+        </div>
         <h2 class="Sidenav-header-title"><?= app()->config->item('name', 'site_settings') ?></h2>
     </header>
     <aside class="Sidenav-account">

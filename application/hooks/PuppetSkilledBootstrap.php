@@ -59,6 +59,11 @@ class PuppetSkilledBootstrap
             return new \Globalis\PuppetSkilled\Queue\Service($c['queueConnection']);
         };
 
+        // Language
+        $container['languageService'] = function ($c) {
+            return new \App\Service\Language\Language();
+        };
+
         // Init ORM
         \Globalis\PuppetSkilled\Database\Magic\Model::setConnectionResolver($container['db']);
         \Globalis\PuppetSkilled\Database\Magic\Model::setEventDispatcher($container['eventDispatcher']);

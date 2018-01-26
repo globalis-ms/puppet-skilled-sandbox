@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 use \Globalis\PuppetSkilled\Library\FormValidation;
 use App\Model\User;
-use App\Service\Language\Language;
 
 class Profile extends \App\Core\Controller\FrontOffice
 {
@@ -26,8 +25,7 @@ class Profile extends \App\Core\Controller\FrontOffice
 
         $validator = $this->getValidator($item);
         if (!$validator->run()) {
-            $service = new Language();
-            $languages = $service->getLanguagesList();
+            $languages = $this->languageService->getLanguagesList();
 
             $this->render([
                 'validator' => $validator,
@@ -41,6 +39,7 @@ class Profile extends \App\Core\Controller\FrontOffice
             $item->address_1 = $validator->set_value('address_1');
             $item->address_2 = $validator->set_value('address_2') ?: null;
             $item->postcode = $validator->set_value('postcode');
+            $item->language = $validator->set_value('language');
             $item->town = $validator->set_value('town');
             $item->timezone = $validator->set_value('timezone');
             // @TODO GERER DATE FORMAT !
@@ -51,8 +50,7 @@ class Profile extends \App\Core\Controller\FrontOffice
             $item->update();
             $item->releaseLock();
             // Update language
-            $service = new Language();
-            $service->change($item->language);
+            $this->languageService->change($item->language);
             $this->flashMessage('lang:general_message_edit-success', 'lang:general_message_title-success', 'success');
             redirect('frontoffice/profile');
         }
@@ -162,7 +160,8 @@ class Profile extends \App\Core\Controller\FrontOffice
             'lang:profile_label_language',
             [
                 'trim',
-                'required'
+                'required',
+                'in_list[' . implode(',', array_keys($this->languageService->getLanguagesList())) . ']',
             ]
         );
         $validator->set_rules(
