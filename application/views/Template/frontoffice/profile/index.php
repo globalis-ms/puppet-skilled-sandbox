@@ -1,8 +1,8 @@
 <?php $preprendId = uniqid();?>
 <?= form_open($this->fetch('validator'), current_url(), ['class' => 'profile_form']) ?>
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('profile_label_personal') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('profile_label_personal') ?></h2>
+    <div class="card-body">
 
     <?= $this->element(
         'form/block_input',
@@ -111,8 +111,8 @@
 </fieldset>
 
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('profile_label_authentication') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('profile_label_authentication') ?></h2>
+    <div class="card-body">
         <?= $this->element(
             'form/block_input',
             [
@@ -144,8 +144,8 @@
 </fieldset>
 
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('profile_label_complement') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('profile_label_complement') ?></h2>
+    <div class="card-body">
         <?= $this->element(
             'form/block_input',
             [
