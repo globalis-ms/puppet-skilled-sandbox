@@ -15,7 +15,7 @@ $baseUrl = $this->fetch('base_url') ?: current_base_url();
         ) ?>
         <?= lang('general_label_total_element') ?> : <?= $pagers['total'] ?>
     </div>
-    <div class="card-block">
+    <div class="card-body">
         <form action="<?= site_url($baseUrl) ?>" method="get" accept-charset="utf-8">
             <?= $this->element(
                 'form/input',
