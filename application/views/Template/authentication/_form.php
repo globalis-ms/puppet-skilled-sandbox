@@ -1,11 +1,11 @@
 <?php $preprendId = uniqid(); ?>
 <?= form_open($this->fetch('validator'), current_url(), ['class' => $this->fetch('form_class')]) ?>
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang($this->fetch('form_title_lang')) ?></h2>
+    <h2 class="card-header bg-dark text-white"><?= lang($this->fetch('form_title_lang')) ?></h2>
     <?php if ($this->fetch('renew_password')): ?>
     <div class="alert alert-warning"><?= lang('authentication_notice_expiration') ?></div>
     <?php endif ?>
-    <div class="card-block">
+    <div class="card-body">
         <?php if (!$this->fetch('renew_password')): ?>
         <?= $this->element(
             'form/block_input',

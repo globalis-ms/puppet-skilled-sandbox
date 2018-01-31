@@ -1,8 +1,8 @@
 <?php $preprendId = uniqid(); ?>
 <?= form_open($this->fetch('validator'), 'authentication/forgot_password', ['class' => 'forgot_password']) ?>
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('authentication_title_forgot_password') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('authentication_title_forgot_password') ?></h2>
+    <div class="card-body">
         <?= $this->element(
             'form/block_input',
             [
