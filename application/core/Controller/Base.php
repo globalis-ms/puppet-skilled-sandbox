@@ -146,15 +146,6 @@ abstract class Base extends \Globalis\PuppetSkilled\Controller\Base
                 'uri' =>  current_url()
             ];
         }
-
-    }
-
-    protected function setEntityBreadcrumb($string, $routeKey)
-    {
-        $this->breadcrumb['entity'] =  [
-            'label' => $string,
-            'uri' =>  current_base_url(true) . '/' . $routeKey
-        ];
     }
 
     protected function flashMessage($message, $title, $template = 'info', $key = 'flash_msg')

@@ -9,6 +9,7 @@ class User extends Model
     use \Globalis\PuppetSkilled\Database\Magic\SoftDeletes;
     use \Globalis\PuppetSkilled\Database\Magic\Uuid;
     use \Globalis\PuppetSkilled\Database\Magic\Lock\Lockable;
+    use \Globalis\PuppetSkilled\Database\Magic\Revisionable\Revisionable;
 
     /**
      * The table associated with the model.
@@ -129,36 +130,6 @@ class User extends Model
     public function verifyPassword($password)
     {
         return password_verify($password, $this->attributes['password']);
-    }
-
-    /**
-     * Get the password for the user.
-     *
-     * @return string
-     */
-    public function getAuthPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Get the name of the unique identifier for the user.
-     *
-     * @return string
-     */
-    public function getAuthIdentifierName()
-    {
-        return 'username';
-    }
-
-    /**
-     * Get the unique identifier for the user.
-     *
-     * @return mixed
-     */
-    public function getAuthIdentifier()
-    {
-        return $this->username;
     }
 
     public function isAdministrator()

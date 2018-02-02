@@ -1,1 +1,1 @@
-Home sweet home
+<?= lang('home_text_index') ?>

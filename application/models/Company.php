@@ -5,7 +5,10 @@ use Globalis\PuppetSkilled\Database\Magic\Model;
 
 class Company extends Model
 {
+    use \Globalis\PuppetSkilled\Database\Magic\SoftDeletes;
     use \Globalis\PuppetSkilled\Database\Magic\Uuid;
+    use \Globalis\PuppetSkilled\Database\Magic\Lock\Lockable;
+    use \Globalis\PuppetSkilled\Database\Magic\Revisionable\Revisionable;
 
     /**
      * The table associated with the model.
@@ -49,5 +52,12 @@ class Company extends Model
      */
     protected $fillable = [
         'name',
+    ];
+
+    
+    protected $nonRevisionable = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 }
