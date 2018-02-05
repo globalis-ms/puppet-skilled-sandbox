@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 use \Globalis\PuppetSkilled\Library\FormValidation;
-use \App\Model\User as UserModel;
+use \App\Model\User;
 
 class Authentication extends \App\Core\Controller\Base
 {
@@ -45,7 +45,7 @@ class Authentication extends \App\Core\Controller\Base
                     'authentication_error_invalid_reset_account',
                     function ($value) use ($validator) {
                         if ($value !== '') {
-                            if ($user = UserModel::where('username', $value)->first()) {
+                            if ($user = User::where('username', $value)->first()) {
                                 $validator->validation_data['userEntity'] = $user;
                                 return true;
                             }
@@ -95,7 +95,7 @@ class Authentication extends \App\Core\Controller\Base
             redirect('authentication/login');
         }
 
-        $user = UserModel::find($token->user_id);
+        $user = User::find($token->user_id);
 
         $validator = new FormValidation();
         $validator->set_rules(
