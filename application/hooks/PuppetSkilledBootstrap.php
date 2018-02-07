@@ -61,7 +61,7 @@ class PuppetSkilledBootstrap
 
         // Language
         $container['languageService'] = function ($c) {
-            return new \App\Service\Language\Language();
+            return new \App\Service\Language();
         };
 
         // Init ORM

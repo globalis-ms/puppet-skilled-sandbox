@@ -1,5 +1,5 @@
 <?php
-namespace App\Service\Language;
+namespace App\Service;
 
 class Language extends \Globalis\PuppetSkilled\Service\Base
 {

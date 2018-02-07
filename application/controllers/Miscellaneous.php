@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use App\Service\Language\Language;
-
 class Miscellaneous extends \App\Core\Controller\Base
 {
     protected $isPublic = true;
@@ -16,8 +14,7 @@ class Miscellaneous extends \App\Core\Controller\Base
      */
     public function changelanguage($langue = null)
     {
-        $service = new Language();
-        $service->change($langue);
+        $this->languageService->change($langue);
         redirect_referrer();
     }
 
