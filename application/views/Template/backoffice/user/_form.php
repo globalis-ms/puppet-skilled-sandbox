@@ -4,8 +4,8 @@ $item = $this->fetch('item');
 ?>
 <?= form_open($this->fetch('validator'), current_url(), ['class' => 'user_form']) ?>
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('user_label_general') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('user_label_general') ?></h2>
+    <div class="card-body">
         <div class="row">
             <div class="col-lg-6">
             <?= $this->element(
@@ -144,8 +144,8 @@ $item = $this->fetch('item');
     </div>
 </fieldset>
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('user_label_role') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('user_label_role') ?></h2>
+    <div class="card-body">
         <?php if (app()->authenticationService->user()->isAdministrator()) : ?>
             <?= $this->element(
                 'form/block_input',
@@ -174,8 +174,8 @@ $item = $this->fetch('item');
 </fieldset>
 
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('user_label_configuration') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('user_label_configuration') ?></h2>
+    <div class="card-body">
         <?= $this->element(
             'form/block_input',
             [
@@ -203,8 +203,8 @@ $item = $this->fetch('item');
 
 <?php if (!$item || !$item->password): ?>
 <fieldset class="card mb-4">
-    <h2 class="card-header bg-inverse text-white"><?= lang('user_label_actions') ?></h2>
-    <div class="card-block">
+    <h2 class="card-header bg-dark text-white"><?= lang('user_label_actions') ?></h2>
+    <div class="card-body">
         <?= $this->element(
             'form/block_input',
             [
