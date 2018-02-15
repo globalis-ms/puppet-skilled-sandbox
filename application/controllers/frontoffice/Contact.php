@@ -21,21 +21,21 @@ class Contact extends \App\Core\Controller\FrontOffice
         $filters = new QueryFilter(
             [
                 'filters' => [
-                    'last_name' => function($query, $value) {
+                    'last_name' => function ($query, $value) {
                         return $query
                             ->where('last_name', 'like', '%' . $value . '%');
                     },
-                    'first_name' => function($query, $value) {
+                    'first_name' => function ($query, $value) {
                         return $query
                             ->where('first_name', 'like', '%' . $value . '%');
                     },
-                    'email' => function($query, $value) {
+                    'email' => function ($query, $value) {
                         return $query
                             ->where('email', 'like', '%' . $value . '%');
                     },
-                    'company' => function($query, $value) {
+                    'company' => function ($query, $value) {
                         return $query
-                            ->whereHas('companies', function($query) use ($value) {
+                            ->whereHas('companies', function ($query) use ($value) {
                                 $query->where('name', 'like', '%' . $value . '%');
                             });
                     },
