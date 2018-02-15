@@ -9,7 +9,7 @@ class Role extends Model
 
     const ADMIN = 'administrator';
     const MANAGER = 'manager';
-    const USER = 'user'; 
+    const USER = 'user';
 
     /**
      * The table associated with the model.

@@ -7,9 +7,9 @@ use App\Model\User;
 class Profile extends \App\Core\Controller\FrontOffice
 {
     protected $autoload = [
-		'helper' => [
-        	'form',
-        	'date'
+        'helper' => [
+            'form',
+            'date'
         ],
     ];
 

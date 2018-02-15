@@ -32,5 +32,4 @@ class UsersRoles extends \Globalis\PuppetSkilled\Database\Magic\Model
      * @var bool
      */
     public $timestamps = false;
-
 }
