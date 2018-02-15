@@ -6,5 +6,4 @@ abstract class BackOffice extends Base
     protected $layout = 'default';
 
     protected $languageDomain = 'backoffice';
-
 }

@@ -29,7 +29,7 @@ class Company extends \App\Core\Controller\BackOffice
         $filters = new QueryFilter(
             [
                 'filters' => [
-                    'search' => function($query, $value) {
+                    'search' => function ($query, $value) {
                         return $query->where('name', 'like', $value.'%');
                     },
                 ],

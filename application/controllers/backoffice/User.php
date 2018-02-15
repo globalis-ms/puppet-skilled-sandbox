@@ -36,7 +36,7 @@ class User extends \App\Core\Controller\BackOffice
         $filters = new QueryFilter(
             [
                 'filters' => [
-                    'search' => function($query, $value) {
+                    'search' => function ($query, $value) {
                         return $query
                             ->where('last_name', 'like', $value.'%')
                             ->orWhere('first_name', 'like', $value.'%')
