@@ -99,7 +99,7 @@ return [
             'choices' => ['false', 'true'],
             'default' => 'false',
             'if' => function(array $currentConfig) {
-                return $currentConfig['WEB_SCHEME'] === 'http';
+                return $currentConfig['WEB_SCHEME'] !== 'http';
             },
         ],
 
@@ -123,7 +123,7 @@ return [
             'question' => 'Email server port',
             'default' => '25',
             'if' => function(array $currentConfig) {
-                return $currentConfig['config_key_2'] === 'smtp';
+                return $currentConfig['EMAIL_PROTOCOL'] === 'smtp';
             },
          ],
     ]
